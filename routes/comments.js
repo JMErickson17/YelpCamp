@@ -27,6 +27,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
         } else {
             Comment.create(req.body.comment, function (err, comment) {
                 if (err) {
+                    req.flash("error", "Something went wrong");
                     console.log(err);
                 } else {
                     // Add username and ID to comment to associate a user with a comment
@@ -71,6 +72,7 @@ router.delete('/:comment_id', middleware.verifyCommentOwnership, function(req, r
        if (err) {
            res.redirect("back");
        } else {
+           req.flash("success", "Comment Deleted");
            res.redirect('/campgrounds/' + req.params.id);
        }
     });

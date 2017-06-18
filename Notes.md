@@ -45,3 +45,14 @@ IDs returned from the database are mongoose objects, IDs passed into the request
 To compare the two, use the equals() method. 
 
 ## Express Router
+
+
+## Flash 
+Flash is a special area of the session used for storing messages. Messages are written to the flash and cleared after
+being displayed to the user. The flash is typically used in combination with redirects, ensuring that the message is 
+available to the next page that is to be rendered.
+
+Calling req.flash("type", "message") before the redirect adds a message to the flash that can be used on the next page. 
+
+## Errors
+The error object contains a name and message for the returned error that can be used to display to the user. 

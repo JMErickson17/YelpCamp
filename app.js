@@ -6,7 +6,9 @@ var express         = require('express'),
     mongoose        = require('mongoose'),
     passport        = require('passport'),
     bodyParser      = require('body-parser'),
+    flash           = require('connect-flash'),
     User            = require('./models/user'),
+    logger          = require('morgan'),
     LocalStrategy   = require('passport-local'),
     expressSession  = require('express-session'),
     methodOverride  = require('method-override'),
@@ -18,13 +20,17 @@ var commentRoutes    = require('./routes/comments'),
 
 var app = express();
 
-// Creates or connects to the database
+/* Creates or connects to the database */
 mongoose.connect("mongodb://localhost/yelp_camp");
+
+/* -------------------- Express Configuration -------------------- */
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
+app.use(logger('dev'));
 
 //seedDB();
 
@@ -41,15 +47,19 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// By passing req.user into res.locals.currentUser it makes the current user available to all templates
+/* Passing req.user into res.locals.currentUser makes the current user available to all templates as currentUser.
+ * Adding error and success into res.locals makes the flash variables available in all views.
+ */
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
 /* -------------------- Route Config -------------------- */
 
-// By passing a String with the route prefixes, express will append the string to the beginning of the route
+/* By passing a String with the route prefixes, express will append the string to the beginning of the route */
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use(indexRoutes);

@@ -60,7 +60,7 @@ router.get("/:id", function (req, res) {
 router.get('/:id/edit', middleware.verifyCampgroundOwnership, function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
         if (err) {
-            res.redirect('/campgrounds')
+            res.redirect('/campgrounds');
         } else {
             res.render('campgrounds/edit', {campground: campground});
         }
