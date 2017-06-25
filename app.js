@@ -26,7 +26,6 @@ process.env['DATABASEURL'] = 'mongodb://localhost/yelp_camp';
 
 /* Creates or connects to the database */
 mongoose.connect(process.env.DATABASEURL);
-mongoose.connect("mongodb://JustinErickson:Justin17@ds135669.mlab.com:35669/yelp_camp_justinerickson");
 
 /* -------------------- Express Configuration -------------------- */
 
