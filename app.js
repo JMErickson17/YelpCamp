@@ -22,7 +22,8 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 /* Creates or connects to the database */
-mongoose.connect("mongodb://localhost/yelp_camp");
+// mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://JustinErickson:Justin17@ds135669.mlab.com:35669/yelp_camp_justinerickson");
 
 /* -------------------- Express Configuration -------------------- */
 
