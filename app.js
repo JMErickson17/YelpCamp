@@ -24,6 +24,8 @@ var port = process.env.PORT || 3000;
 /* Creates or connects to the database */
 mongoose.connect(process.env.DATABASEURL);
 
+console.log(process.env.DATABASEURL);
+
 /* -------------------- Express Configuration -------------------- */
 
 app.use(bodyParser.urlencoded({extended: true}));
