@@ -21,9 +21,6 @@ var commentRoutes    = require('./routes/comments'),
 var app = express();
 var port = process.env.PORT || 3000;
 
-/* Environment Variables */
-process.env['DATABASEURL'] = 'mongodb://localhost/yelp_camp';
-
 /* Creates or connects to the database */
 mongoose.connect(process.env.DATABASEURL);
 
